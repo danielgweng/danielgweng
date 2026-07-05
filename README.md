@@ -1,10 +1,7 @@
-- 👋 Hi, I’m @danielgweng
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
+# Regulars — Pilot 001 site
 
-<!---
-danielgweng/danielgweng is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+Landing page + application database for the Toronto pilot.
+
+**Start here: read `CLAUDE.md`** — it has full context, the deploy runbook, and guardrails.
+
+Local dev: `npm install`, copy `.env.example` to `.env.local` with a real `DATABASE_URL`, then `npm run dev`.
