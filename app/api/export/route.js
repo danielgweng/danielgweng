@@ -11,7 +11,7 @@ export async function GET() {
   const sql = await db();
   const rows = await sql`SELECT * FROM applications ORDER BY created_at ASC`;
 
-  const header = ["id", "first_name", "email", "phone", "age_band", "neighbourhood", "nights", "activities", "created_at"];
+  const header = ["id", "first_name", "email", "phone", "age_band", "location", "nights", "activities", "created_at"];
   const lines = [header.join(",")];
 
   for (const r of rows) {
@@ -22,7 +22,7 @@ export async function GET() {
         csvField(r.email),
         csvField(r.phone),
         csvField(r.age_band),
-        csvField(r.neighbourhood),
+        csvField(r.location),
         csvField(r.nights.join("|")),
         csvField(r.activities.join("|")),
         r.created_at.toISOString(),

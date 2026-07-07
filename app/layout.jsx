@@ -1,9 +1,9 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Regulars — Same crew. Same night. Every week. | Toronto Pilot",
+  title: "Regulars — Same crew. Same night. Every week.",
   description:
-    "Regulars places you in a fixed crew of six that meets weekly — bouldering, 5-a-side, run + pint. Toronto pilot now forming. Claim an open spot.",
+    "Regulars places you in a fixed crew of six that meets weekly — board games, bouldering, run + pint, coffee. Sign up from anywhere; crews launch where six line up. Claim an open spot.",
 };
 
 export default function RootLayout({ children }) {

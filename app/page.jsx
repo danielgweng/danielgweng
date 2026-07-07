@@ -48,15 +48,15 @@ export default function Home() {
       email: (fd.get("femail") || "").toString().trim(),
       phone: (fd.get("fphone") || "").toString().trim(),
       ageBand: fd.get("fage"),
-      neighbourhood: fd.get("fhood"),
+      location: (fd.get("floc") || "").toString().trim(),
       nights: fd.getAll("night"),
       activities: fd.getAll("act"),
       website: fd.get("website") || "",
     };
 
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
-    if (!payload.firstName || !emailOk || payload.nights.length < 1 || payload.activities.length < 1) {
-      setError("Fill in your name and a valid email, and pick at least one night and one activity.");
+    if (!payload.firstName || !emailOk || !payload.location || payload.nights.length < 1 || payload.activities.length < 1) {
+      setError("Fill in your name, a valid email, and where you are — and pick at least one day and one activity.");
       errRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
@@ -107,7 +107,7 @@ export default function Home() {
       <header className="hero" id="top">
         <div className="wrap hero-grid">
           <div>
-            <p className="eyebrow rise d1">Toronto · Pilot 001 · Crews of six</p>
+            <p className="eyebrow rise d1">Pilot 001 · Crews of six · Apply from anywhere</p>
             <h1>
               <span className="rise d1" style={{ display: "block" }}>Same crew.</span>
               <span className="rise d2" style={{ display: "block" }}>Same night.</span>
@@ -115,7 +115,7 @@ export default function Home() {
             </h1>
             <p className="hero-sub rise d4">
               Regulars places you in a <strong>fixed crew of six</strong> that meets weekly for something
-              worth leaving the house for — bouldering, 5-a-side, a run that ends at a pub.
+              worth leaving the house for — a board game café table, a bouldering session, a run that ends at a pub.
               No swiping. No mixers. No new strangers every week. <strong>One standing plan, held for you.</strong>
             </p>
             <div className="hero-ctas rise d4">
@@ -135,8 +135,8 @@ export default function Home() {
                 <h3 className="cc-title">Crew 07 — The Junction</h3>
                 <div className="cc-rows">
                   <div className="cc-row"><span className="k">When</span><span className="v">Tuesdays · 7:00 PM · Weekly</span></div>
-                  <div className="cc-row"><span className="k">What</span><span className="v">Bouldering</span></div>
-                  <div className="cc-row"><span className="k">Where</span><span className="v">Climbing gym, Junction Triangle</span></div>
+                  <div className="cc-row"><span className="k">What</span><span className="v">Board games</span></div>
+                  <div className="cc-row"><span className="k">Where</span><span className="v">Board game café, Junction Triangle — walk-in</span></div>
                   <div className="cc-row"><span className="k">After</span><span className="v">Pint around the corner</span></div>
                 </div>
                 <div className="cc-roster">
@@ -156,11 +156,11 @@ export default function Home() {
       {/* ============ STRIP ============ */}
       <div className="strip" role="presentation">
         <div className="wrap strip-in">
+          <span>Board games</span><span className="slot f"></span>
           <span>Bouldering</span><span className="slot f"></span>
-          <span>5-a-side</span><span className="slot f"></span>
           <span>Run + pint</span><span className="slot f"></span>
-          <span>Cards &amp; games</span><span className="slot f"></span>
-          <span>Toronto · Summer 2026</span>
+          <span>Coffee</span><span className="slot f"></span>
+          <span>Starting in Toronto · Summer 2026</span>
         </div>
       </div>
 
@@ -206,18 +206,18 @@ export default function Home() {
           <div className="steps">
             <div className="step reveal">
               <span className="step-n">Step 01</span>
-              <span className="step-t">Tell us your nights</span>
-              <span className="step-desc">A 90-second application: your neighbourhood, the nights you&apos;re free, your top two activities. That&apos;s it — no bio, no photos.</span>
+              <span className="step-t">Tell us your days</span>
+              <span className="step-desc">A 90-second application: where you are — any neighbourhood, any city — the days you&apos;re free, your top two activities. That&apos;s it — no bio, no photos.</span>
             </div>
             <div className="step reveal">
               <span className="step-n">Step 02</span>
               <span className="step-t">Get placed in a crew</span>
-              <span className="step-desc">We build crews of six — <strong>same area, same age band, mixed skill.</strong> You get a text within a week: your crew, your night, your spot.</span>
+              <span className="step-desc">We build crews of six — <strong>same area, same age band, mixed skill.</strong> Once six line up in your area, you get a text: your crew, your night, your spot.</span>
             </div>
             <div className="step reveal">
               <span className="step-n">Step 03</span>
               <span className="step-t">Same time, every week</span>
-              <span className="step-desc">Your slot is held at a partner venue. A Regulars captain hosts the first weeks so it&apos;s never awkward — he books, he intros, he keeps score.</span>
+              <span className="step-desc">Crews meet at walk-in spots — a board game café, a day-pass gym, a coffee shop. No bookings, no memberships. A Regulars captain hosts the first weeks so it&apos;s never awkward — he picks the table, he intros, he keeps score.</span>
             </div>
             <div className="step reveal">
               <span className="step-n">Step 04</span>
@@ -236,35 +236,35 @@ export default function Home() {
           <div className="act-grid reveal">
             <article className="act">
               <div className="act-top">
-                <h3 className="act-name">Bouldering</h3>
-                <span className="act-tag">Tue / Thu</span>
+                <h3 className="act-name">Board games</h3>
+                <span className="act-tag">Any night</span>
               </div>
-              <p className="act-desc">No ropes, no partner needed, no experience required. You talk between climbs — which is exactly why it works. Junction &amp; Leslieville gyms.</p>
-              <div className="act-foot"><span>Beginner-first</span><span className="forming">Crews forming · 2 open</span></div>
+              <p className="act-desc">A board game café table — walk in, order a coffee, play whatever the table votes. Catan to euchre. For the anti-cardio crowd. Stakes low, rivalries eternal.</p>
+              <div className="act-foot"><span>Zero sweat</span><span className="forming">Crews forming</span></div>
             </article>
             <article className="act">
               <div className="act-top">
-                <h3 className="act-name">5-a-side</h3>
-                <span className="act-tag">Wed / Sun</span>
+                <h3 className="act-name">Bouldering</h3>
+                <span className="act-tag">Any night</span>
               </div>
-              <p className="act-desc">Small-pitch football, chatty pace, all touch levels. Turf at Monarch Park and Cherry Beach; dome in winter. Shins optional, trash talk included.</p>
-              <div className="act-foot"><span>All skill levels</span><span className="forming">Crews forming · 1 open</span></div>
+              <p className="act-desc">No ropes, no partner needed, no experience required. Day-pass gyms — buy a pass, climb, done. You talk between climbs, which is exactly why it works.</p>
+              <div className="act-foot"><span>Beginner-first</span><span className="forming">Crews forming</span></div>
             </article>
             <article className="act">
               <div className="act-top">
                 <h3 className="act-name">Run + pint</h3>
-                <span className="act-tag">Mon / Thu</span>
+                <span className="act-tag">Any night</span>
               </div>
-              <p className="act-desc">An easy 5K — conversation pace, no watches — that ends at the same pub every week. High Park and waterfront loops. The pint is the point.</p>
-              <div className="act-foot"><span>Conversation pace</span><span className="forming">Crews forming · 3 open</span></div>
+              <p className="act-desc">An easy 5K — conversation pace, no watches — that ends at the same pub every week. Public routes, no fees, no gear. The pint is the point.</p>
+              <div className="act-foot"><span>Conversation pace</span><span className="forming">Crews forming</span></div>
             </article>
             <article className="act">
               <div className="act-top">
-                <h3 className="act-name">Cards &amp; games</h3>
-                <span className="act-tag">Tue / Fri</span>
+                <h3 className="act-name">Coffee</h3>
+                <span className="act-tag">Mornings too</span>
               </div>
-              <p className="act-desc">Poker, euchre, or whatever the table votes — a held back-room table on Ossington. For the anti-cardio crowd. Stakes low, rivalries eternal.</p>
-              <div className="act-foot"><span>Zero sweat</span><span className="forming">Crews forming · 2 open</span></div>
+              <p className="act-desc">The same coffee shop table, the same hour, every week. Chess board optional. By week four the barista starts your order when you walk in.</p>
+              <div className="act-foot"><span>Lowest bar to entry</span><span className="forming">Crews forming</span></div>
             </article>
           </div>
         </div>
@@ -283,7 +283,7 @@ export default function Home() {
             <div className="rule">
               <p className="rule-k">Rule 01</p>
               <h3 className="rule-t">The roster is fixed</h3>
-              <p className="rule-d">Same six, every week. No rotating strangers, no drop-ins. Familiarity is the feature — week four beats week one, and week ten beats them both.</p>
+              <p className="rule-d">Same six, every week. No rotating strangers, no one-off guests. Familiarity is the feature — week four beats week one, and week ten beats them both.</p>
             </div>
             <div className="rule">
               <p className="rule-k">Rule 02</p>
@@ -312,7 +312,7 @@ export default function Home() {
             <h2 className="reveal">Built to be deleted.</h2>
             <p className="reveal">
               Most apps are engineered to keep you on them. Regulars is engineered to make itself
-              unnecessary. By week 12, the crew keeps the slot, the venue knows your order,
+              unnecessary. By week 12, the crew owns the night, the café knows your order,
               and the group chat runs itself. <strong>We hand over the keys and step out.</strong>
             </p>
             <p className="reveal">
@@ -333,21 +333,25 @@ export default function Home() {
       {/* ============ PILOT + FAQ ============ */}
       <section className="pilot" id="faq">
         <div className="wrap">
-          <p className="sec-label reveal">Pilot 001 · Toronto</p>
+          <p className="sec-label reveal">Pilot 001</p>
           <h2 className="reveal">The fine print, up front.</h2>
           <div className="pilot-grid">
             <div className="reveal" aria-label="Pilot details">
-              <div className="fact"><span className="k">First crews</span><span className="v">Week of July 20, 2026</span></div>
+              <div className="fact"><span className="k">First crews</span><span className="v">Week of July 20, 2026 — starting in Toronto</span></div>
               <div className="fact"><span className="k">Who</span><span className="v">Men 20–30, all skill levels</span></div>
-              <div className="fact"><span className="k">Where</span><span className="v">Junction · Ossington / Trinity Bellwoods · Leslieville · Liberty Village · Annex</span></div>
-              <div className="fact"><span className="k">Cost</span><span className="v">Free during pilot — you cover your own pass or pint</span></div>
+              <div className="fact"><span className="k">Where</span><span className="v">Sign up from anywhere — crews launch where applications cluster, one neighbourhood at a time</span></div>
+              <div className="fact"><span className="k">Venues</span><span className="v">Walk-in spots only — board game cafés, coffee shops, day-pass gyms. No bookings.</span></div>
+              <div className="fact"><span className="k">Cost</span><span className="v">Free during pilot — you cover your own coffee, pass, or pint</span></div>
               <div className="fact"><span className="k">Commitment</span><span className="v">One night a week · 12-week season</span></div>
-              <div className="fact"><span className="k">Spots</span><span className="v">48 across 8 crews — then waitlist</span></div>
             </div>
             <div className="reveal">
               <details>
                 <summary>Is this a dating thing? <span className="plus">+</span></summary>
                 <p>No. Crews exist for the activity and the standing plan. What you do with your other six nights is your business.</p>
+              </details>
+              <details>
+                <summary>No crew near me yet? <span className="plus">+</span></summary>
+                <p>Apply anyway. Crews launch wherever six guys with an overlapping free night line up — <strong>your application is the vote that puts your neighbourhood on the map.</strong> First crews start in Toronto; the list decides what&apos;s next.</p>
               </details>
               <details>
                 <summary>Why men 20–30? <span className="plus">+</span></summary>
@@ -367,7 +371,7 @@ export default function Home() {
               </details>
               <details>
                 <summary>What happens after 12 weeks? <span className="plus">+</span></summary>
-                <p>The slot, the venue relationship, and the group chat are yours to keep — free, forever. Most crews just... keep going. That&apos;s the win condition.</p>
+                <p>The night, the spot, and the group chat are yours to keep — free, forever. Most crews just... keep going. That&apos;s the win condition.</p>
               </details>
             </div>
           </div>
@@ -424,25 +428,19 @@ export default function Home() {
                 </div>
 
                 <div className="f-row">
-                  <label className="f-label" htmlFor="fhood">Neighbourhood</label>
-                  <select id="fhood" name="fhood" defaultValue="The Junction / High Park">
-                    <option>The Junction / High Park</option>
-                    <option>Ossington / Trinity Bellwoods</option>
-                    <option>Leslieville / Riverside</option>
-                    <option>Liberty Village / King West</option>
-                    <option>The Annex / Koreatown</option>
-                    <option>Elsewhere in Toronto</option>
-                  </select>
+                  <label className="f-label" htmlFor="floc">Where you are <span className="opt">(neighbourhood + city — anywhere counts)</span></label>
+                  <input type="text" id="floc" name="floc" placeholder="e.g. The Junction, Toronto" autoComplete="address-level2" required />
                 </div>
 
                 <div className="f-row">
-                  <span className="f-label" id="nightsLabel">Nights you can hold weekly</span>
+                  <span className="f-label" id="nightsLabel">Days you can hold weekly</span>
                   <div className="chips" role="group" aria-labelledby="nightsLabel">
                     <label className="chip"><input type="checkbox" name="night" value="Mon" /><span>Mon</span></label>
                     <label className="chip"><input type="checkbox" name="night" value="Tue" /><span>Tue</span></label>
                     <label className="chip"><input type="checkbox" name="night" value="Wed" /><span>Wed</span></label>
                     <label className="chip"><input type="checkbox" name="night" value="Thu" /><span>Thu</span></label>
                     <label className="chip"><input type="checkbox" name="night" value="Fri" /><span>Fri</span></label>
+                    <label className="chip"><input type="checkbox" name="night" value="Sat" /><span>Sat</span></label>
                     <label className="chip"><input type="checkbox" name="night" value="Sun" /><span>Sun</span></label>
                   </div>
                 </div>
@@ -450,18 +448,18 @@ export default function Home() {
                 <div className="f-row">
                   <span className="f-label" id="actsLabel">Top activities — pick up to two</span>
                   <div className="chips" role="group" aria-labelledby="actsLabel">
+                    <label className="chip"><input type="checkbox" name="act" value="Board games" /><span>Board games</span></label>
                     <label className="chip"><input type="checkbox" name="act" value="Bouldering" /><span>Bouldering</span></label>
-                    <label className="chip"><input type="checkbox" name="act" value="5-a-side" /><span>5-a-side</span></label>
                     <label className="chip"><input type="checkbox" name="act" value="Run + pint" /><span>Run + pint</span></label>
-                    <label className="chip"><input type="checkbox" name="act" value="Cards" /><span>Cards &amp; games</span></label>
+                    <label className="chip"><input type="checkbox" name="act" value="Coffee" /><span>Coffee</span></label>
                   </div>
-                  <p className="f-hint">We place on activity first, night second.</p>
+                  <p className="f-hint">We place on activity first, day second. Crews launch wherever six line up.</p>
                 </div>
 
                 <button className="f-submit" type="submit" disabled={status === "sending"}>
                   {status === "sending" ? "Sending…" : "Submit — take the open slot"}
                 </button>
-                <p className="f-fine">Applications reviewed in order. Placement by text within 48 hours. No spam, no feed, ever.</p>
+                <p className="f-fine">Applications reviewed in order. Placement by text as soon as a crew lines up near you. No spam, no feed, ever.</p>
               </form>
             ) : (
               <div className="success" style={{ display: "block" }} role="status">
@@ -469,7 +467,7 @@ export default function Home() {
                 <p>
                   {duplicate
                     ? "We've got your application on file — placement texts go out in order. Sit tight."
-                    : "Application received. We'll text you within 48 hours with your crew number, your night, and your first session. Until then — keep the calendar loose."}
+                    : "Application received. The moment six line up in your area, you get a text: your crew number, your night, your first session. Until then — keep the calendar loose."}
                 </p>
                 <span className="slots">
                   <span className="slot f"></span><span className="slot f"></span><span className="slot f"></span>
@@ -486,7 +484,7 @@ export default function Home() {
         <div className="wrap foot-in">
           <div className="foot-mark">Regulars<span style={{ color: "var(--hivis)" }}>.</span></div>
           <div className="foot-meta">
-            A Toronto experiment in showing up<br />
+            An experiment in showing up · Starting in Toronto<br />
             Pilot 001 · Summer 2026<br />
             <a href="mailto:crews@regulars.club">crews@regulars.club</a>
           </div>

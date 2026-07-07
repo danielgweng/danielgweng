@@ -17,7 +17,7 @@ export default async function Admin() {
 
   const byAct = tally(rows, (r) => r.activities);
   const byNight = tally(rows, (r) => r.nights);
-  const byHood = tally(rows, (r) => [r.neighbourhood]);
+  const byLocation = tally(rows, (r) => [r.location]);
 
   const box = {
     border: "2px solid #153B2E",
@@ -83,7 +83,7 @@ export default async function Admin() {
           {byAct.length === 0 && <p style={{ fontFamily: "var(--mono)", fontSize: 12 }}>—</p>}
         </div>
         <div style={box}>
-          <p style={kicker}>By night</p>
+          <p style={kicker}>By day</p>
           {byNight.map(([k, v]) => (
             <div key={k} style={{ display: "flex", justifyContent: "space-between", fontFamily: "var(--mono)", fontSize: 13, padding: "4px 0" }}>
               <span>{k}</span>
@@ -93,14 +93,14 @@ export default async function Admin() {
           {byNight.length === 0 && <p style={{ fontFamily: "var(--mono)", fontSize: 12 }}>—</p>}
         </div>
         <div style={box}>
-          <p style={kicker}>By neighbourhood</p>
-          {byHood.map(([k, v]) => (
+          <p style={kicker}>By location</p>
+          {byLocation.map(([k, v]) => (
             <div key={k} style={{ display: "flex", justifyContent: "space-between", fontFamily: "var(--mono)", fontSize: 13, padding: "4px 0", gap: 12 }}>
               <span>{k}</span>
               <strong>{v}</strong>
             </div>
           ))}
-          {byHood.length === 0 && <p style={{ fontFamily: "var(--mono)", fontSize: 12 }}>—</p>}
+          {byLocation.length === 0 && <p style={{ fontFamily: "var(--mono)", fontSize: 12 }}>—</p>}
         </div>
       </div>
 
@@ -108,7 +108,7 @@ export default async function Admin() {
         <table style={{ borderCollapse: "collapse", width: "100%", minWidth: 900, fontSize: 13.5, background: "#FAF8F1" }}>
           <thead>
             <tr>
-              {["#", "Name", "Email", "Phone", "Age", "Neighbourhood", "Nights", "Activities", "Applied"].map((h) => (
+              {["#", "Name", "Email", "Phone", "Age", "Location", "Days", "Activities", "Applied"].map((h) => (
                 <th
                   key={h}
                   style={{
@@ -136,7 +136,7 @@ export default async function Admin() {
                 <td style={{ padding: "10px 12px" }}>{r.email}</td>
                 <td style={{ padding: "10px 12px" }}>{r.phone || "—"}</td>
                 <td style={{ padding: "10px 12px", whiteSpace: "nowrap" }}>{r.age_band}</td>
-                <td style={{ padding: "10px 12px" }}>{r.neighbourhood}</td>
+                <td style={{ padding: "10px 12px" }}>{r.location}</td>
                 <td style={{ padding: "10px 12px", fontFamily: "var(--mono)", fontSize: 12 }}>{r.nights.join(" ")}</td>
                 <td style={{ padding: "10px 12px", fontFamily: "var(--mono)", fontSize: 12 }}>{r.activities.join(", ")}</td>
                 <td style={{ padding: "10px 12px", fontFamily: "var(--mono)", fontSize: 12, whiteSpace: "nowrap" }}>

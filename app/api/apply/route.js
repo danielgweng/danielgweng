@@ -1,16 +1,8 @@
 import { db } from "../../../lib/db";
 
 const AGE_BANDS = ["20–23", "24–27", "28–30", "Outside 20–30 (waitlist for future crews)"];
-const HOODS = [
-  "The Junction / High Park",
-  "Ossington / Trinity Bellwoods",
-  "Leslieville / Riverside",
-  "Liberty Village / King West",
-  "The Annex / Koreatown",
-  "Elsewhere in Toronto",
-];
-const NIGHTS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sun"];
-const ACTS = ["Bouldering", "5-a-side", "Run + pint", "Cards"];
+const NIGHTS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const ACTS = ["Board games", "Bouldering", "Run + pint", "Coffee"];
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -31,7 +23,7 @@ export async function POST(request) {
   const email = String(body.email || "").trim().toLowerCase().slice(0, 160);
   const phone = String(body.phone || "").trim().slice(0, 40) || null;
   const ageBand = String(body.ageBand || "");
-  const neighbourhood = String(body.neighbourhood || "");
+  const location = String(body.location || "").trim().slice(0, 120);
   const nights = Array.isArray(body.nights) ? body.nights.filter((n) => NIGHTS.includes(n)) : [];
   const activities = Array.isArray(body.activities)
     ? body.activities.filter((a) => ACTS.includes(a)).slice(0, 2)
@@ -41,12 +33,12 @@ export async function POST(request) {
     !firstName ||
     !EMAIL_RE.test(email) ||
     !AGE_BANDS.includes(ageBand) ||
-    !HOODS.includes(neighbourhood) ||
+    !location ||
     nights.length < 1 ||
     activities.length < 1
   ) {
     return Response.json(
-      { ok: false, error: "Fill in your name and a valid email, and pick at least one night and one activity." },
+      { ok: false, error: "Fill in your name, a valid email, and where you are — and pick at least one day and one activity." },
       { status: 400 }
     );
   }
@@ -54,8 +46,8 @@ export async function POST(request) {
   try {
     const sql = await db();
     await sql`
-      INSERT INTO applications (first_name, email, phone, age_band, neighbourhood, nights, activities)
-      VALUES (${firstName}, ${email}, ${phone}, ${ageBand}, ${neighbourhood}, ${nights}, ${activities})
+      INSERT INTO applications (first_name, email, phone, age_band, location, nights, activities)
+      VALUES (${firstName}, ${email}, ${phone}, ${ageBand}, ${location}, ${nights}, ${activities})
     `;
     return Response.json({ ok: true });
   } catch (err) {

@@ -4,7 +4,7 @@ This file transfers full context from the founder's strategy conversations. Read
 
 ## What this is
 
-**Regulars** is a concierge pilot testing one hypothesis: young men (20–30) will show up weekly to a **fixed crew of six** doing a recurring activity (bouldering, 5-a-side, run + pint, cards) — and by ~week 12 the crew becomes self-sustaining ("graduation"). The pilot is deliberately low-tech: this site's only jobs are (1) convert visitors into applications, (2) store applicants in Postgres, (3) let the founder view/export them to build crews by hand.
+**Regulars** is a concierge pilot testing one hypothesis: young men (20–30) will show up weekly to a **fixed crew of six** doing a recurring activity (board games, bouldering, run + pint, coffee) — and by ~week 12 the crew becomes self-sustaining ("graduation"). The pilot is deliberately low-tech: this site's only jobs are (1) convert visitors into applications, (2) store applicants in Postgres, (3) let the founder view/export them to build crews by hand.
 
 **The single success metric of the whole venture: do the same people still show up in week six?** Everything else is secondary.
 
@@ -14,7 +14,9 @@ This file transfers full context from the founder's strategy conversations. Read
 - **No cash deposits / stakes.** The commitment mechanics are social only (fixed roster, RSVP lock, ghost-twice-lose-the-seat, crew streak). A refundable-deposit model was pressure-tested and rejected: GymPact/Pact precedent (adverse selection, FTC settlement, verification hell). Do not add payment-based commitment features.
 - **Operator-scheduled, activity-anchored.** We pick the time/place and fill it. We do NOT build matching/browse/feeds. "Built to be deleted" is a brand promise — no engagement-farming features, no feed, ever.
 - **Concierge on purpose.** Crew placement happens by hand (text messages), from the admin table/CSV. Don't automate placement yet.
-- **Target segment:** men 20–30, Toronto, five launch neighbourhoods. B2B2C (employer-paid) is the eventual revenue path — not part of this pilot.
+- **Open signup, concentrated launch.** Anyone can apply from any location, any day of the week (free-text location field, all seven days selectable). Crews LAUNCH one neighbourhood at a time, where applications cluster — starting in Toronto. The application list is the demand map; locations and activities grow as users do. Don't reintroduce a fixed neighbourhood dropdown.
+- **No venue partnerships (yet).** Every activity is anchored to walk-in/drop-in venues — board game cafés, coffee shops, day-pass climbing gyms, public running routes. Nothing that needs a booking, permit, or host relationship. (5-a-side was cut for exactly this reason: a weekly pitch needs a permit or a partner.) Don't write copy that promises held slots or partner venues.
+- **Target segment:** men 20–30. B2B2C (employer-paid) is the eventual revenue path — not part of this pilot.
 
 ## Voice & copy guardrails
 
@@ -31,7 +33,7 @@ Dry, confident, rec-league masculine. Short sentences. Specifics over adjectives
 
 - `app/page.jsx` — landing page (client component; form POSTs to `/api/apply`)
 - `app/api/apply/route.js` — validates + inserts; honeypot field `website`; duplicate emails return `{ok:true, duplicate:true}`
-- `app/admin/page.jsx` — applicant table + counts by activity/night/neighbourhood (for crew-building)
+- `app/admin/page.jsx` — applicant table + counts by activity/day/location (for crew-building)
 - `app/api/export/route.js` — CSV download
 - `middleware.js` — HTTP Basic auth on `/admin` and `/api/export`
 - `lib/db.js` — client + schema bootstrap
